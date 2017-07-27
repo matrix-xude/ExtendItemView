@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ExtendPopMenu</string>
+    <string name="choice_1">度假主题</string>
+    <string name="choice_2">目的地</string>
+    <string name="choice_3">酒店类型</string>
+    <string name="choice_4">排序方式</string>
+</resources>
