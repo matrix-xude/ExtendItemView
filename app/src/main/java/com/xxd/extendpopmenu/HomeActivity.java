@@ -2,8 +2,24 @@ package com.xxd.extendpopmenu;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.xxd.extendpopmenu.entity.BackExtendHeader;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -15,6 +31,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
         initView();
+
+    }
+
+    private void initData() {
+        InputStream is = this.getResources().openRawResource(R.raw.filter3);
+        Reader reader = new InputStreamReader(is);
+//        Toast.makeText(this, "找不到json文件", Toast.LENGTH_SHORT).show();
+        Gson gson = new Gson();
+        List<BackExtendHeader> back = gson.fromJson(reader, new TypeToken<List<BackExtendHeader>>() {
+        }.getType());
+        BackExtendHeader header1 = back.get(0);
+        String type = header1.getType();
+        Log.e("xxd", "当前类型：" + type);
     }
 
     private void initView() {
@@ -33,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_choice_1:
-
+                initData();
                 break;
             case R.id.tv_choice_2:
 
@@ -45,5 +74,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
         }
+    }
+
+    private void popWindow() {
+        PopupWindow pop = new PopupWindow();
     }
 }
