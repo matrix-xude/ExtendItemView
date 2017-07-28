@@ -1,0 +1,296 @@
+[
+
+  {
+    "paramType": "2",
+    "paramContent": [
+      {
+        "title": "热门",
+        "content": [
+          {
+            "paramCode": "9999",
+            "paramName": "曼谷",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "首尔",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "普吉岛",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "新加坡",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "东京",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "大阪",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "清迈",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "巴厘岛",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "济州岛",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "吉隆坡",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "芭提雅",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "哥打京那巴鲁",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "京都",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "冲绳",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "苏梅岛",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "甲米",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "洛杉矶",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "悉尼",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "巴黎",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "米兰",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "拉斯维加斯",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "纽约",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "伦敦",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "胡志明市",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "迪拜",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "法兰克福",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "罗马",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "巴塞罗那",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "慕尼黑",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "莫斯科",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "佛罗伦萨",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "苏黎世",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "雅典",
+            "content": null
+          },
+          {
+            "paramCode": "9999",
+            "paramName": "柏林",
+            "content": null
+          }
+        ]
+      },
+      {
+        "title": "国内热门",
+        "content": null
+      },
+      {
+        "title": "国外热门",
+        "content": null
+      }
+    ]
+  },
+  {
+    "paramType": "3",
+    "paramContent": [
+      {
+        "title": "风格",
+        "content": [
+          {
+            "paramCode": "1",
+            "paramName": "民宿",
+            "content": null
+          },
+          {
+            "paramCode": "2",
+            "paramName": "精品酒店",
+            "content": null
+          },
+          {
+            "paramCode": "3",
+            "paramName": "精品客栈",
+            "content": null
+          },
+          {
+            "paramCode": "4",
+            "paramName": "别墅",
+            "content": null
+          },
+          {
+            "paramCode": "5",
+            "paramName": "花园酒店",
+            "content": null
+          },
+          {
+            "paramCode": "6",
+            "paramName": "四合院",
+            "content": null
+          },
+          {
+            "paramCode": "7",
+            "paramName": "度假村",
+            "content": null
+          },
+          {
+            "paramCode": "8",
+            "paramName": "温泉酒店",
+            "content": null
+          },
+          {
+            "paramCode": "9",
+            "paramName": "会务酒店",
+            "content": null
+          },
+          {
+            "paramCode": "10",
+            "paramName": "酒店式公寓",
+            "content": null
+          }
+        ]
+      },
+      {
+        "title": "星级",
+        "content": [
+          {
+            "paramCode": "1",
+            "paramName": "五星",
+            "content": null
+          },
+          {
+            "paramCode": "2",
+            "paramName": "四星",
+            "content": null
+          },
+          {
+            "paramCode": "3",
+            "paramName": "三星",
+            "content": null
+          },
+          {
+            "paramCode": "4",
+            "paramName": "二星级／其他",
+            "content": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "paramType": "4",
+    "paramContent": [
+      {
+        "title": null,
+        "content": [
+          {
+            "paramCode": "1",
+            "paramName": "平台推荐排序",
+            "content": null
+          },
+          {
+            "paramCode": "2",
+            "paramName": "酒店口碑排序",
+            "content": null
+          }
+        ]
+      }
+    ]
+  }
+]
