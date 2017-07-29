@@ -24,28 +24,47 @@ public class ExtendData {
      * 获取标签数据
      */
     public List<Tag> getTags() {
+
         List<Tag> tagList = new ArrayList<>();
-
-        List<ExtendItem> tempList = list;
-        while (!AssertUtil.isEmpty(tempList)) {
-            for (int i = 0; i < list.size(); i++) {
-                ExtendItem item = list.get(i);
-                if (item.isChoice()) {
-                    Tag tag = new Tag();
-                    tag.addItem(item);
-                    while (!AssertUtil.isEmpty(item.getChild())) {
-
-                    }
-                }
-            }
-        }
-
+        filterItem(list,null,tagList);
         return tagList;
     }
 
     // 筛选出需要的tag数据
-    private void filterItem(ExtendItem itme, Tag lastTag, List<Tag> tagList) {
+    private boolean filterItem(List<ExtendItem> list, Tag lastTag, List<Tag> tagList) {
 
+        boolean flag = false;  // 当前层级是否有被选中的选项
+        if (AssertUtil.isEmpty(list))
+            return flag;
+
+        for (int i = 0; i < list.size(); i++) {
+            ExtendItem item = list.get(i);
+            if (!item.isChoice()) // 没有被选择，忽略掉
+                continue;
+
+            flag = true;
+            // 构建当前层级、当前选项的tag
+            Tag currentLevelTag = null;
+            if (lastTag == null) { // 上一个tag为null，即第一级遍历
+                currentLevelTag = new Tag();
+            } else {
+                currentLevelTag = new Tag(lastTag);
+            }
+            lastTag.addItem(item);
+
+            // 被选中的情况下 1：有子集合遍历子集合  2：没有子集合直接添加到子集合
+            if (AssertUtil.isEmpty(item.getChild())) {
+                Tag tag = new Tag(currentLevelTag);
+                tagList.add(tag);
+            } else {
+                boolean filterItem = filterItem(item.getChild(), lastTag, tagList);
+                if (!filterItem){  // 下一级没有被选中的条目，添加此条目到tagList
+                    Tag tag = new Tag(currentLevelTag);
+                    tagList.add(tag);
+                }
+            }
+        }
+        return flag;
     }
 
 
@@ -93,9 +112,24 @@ public class ExtendData {
             this.tagList = new ArrayList<>();
         }
 
+        public Tag(Tag tag) {
+            this.tagList = new ArrayList<>();
+            if (tag != null && !AssertUtil.isEmpty(tagList)) {
+                List<ExtendItem> lastTagList = tag.getTagList();
+                for (ExtendItem item : lastTagList) {
+                    addItem(item);
+                }
+            }
+        }
+
         // 添加item，用于标签展示
         public void addItem(ExtendItem item) {
             tagList.add(item);
+        }
+
+        // 获取所有添加的标签
+        public List<ExtendItem> getTagList() {
+            return tagList;
         }
 
 
