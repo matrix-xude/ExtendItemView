@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xxd.extendpopmenu.entity.BackExtendHeader;
+import com.xxd.extendpopmenu.entity.ExtendData;
+import com.xxd.extendpopmenu.trans.ExtendDataTrans;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +26,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv1, tv2, tv3, tv4;
+    private List<BackExtendHeader> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         Gson gson = new Gson();
         List<BackExtendHeader> back = gson.fromJson(reader, new TypeToken<List<BackExtendHeader>>() {
         }.getType());
+        data = back;
         BackExtendHeader header1 = back.get(0);
         String type = header1.getType();
         Log.e("xxd", "当前类型：" + type);
+
+    }
+
+    private void translateData() {
+        List<ExtendData> parse = ExtendDataTrans.parse(data);
+        ExtendData data = parse.get(1);
+        Log.e("xxd", "总层级数：" + data.getTotalLevel());
     }
 
     private void initView() {
@@ -65,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 initData();
                 break;
             case R.id.tv_choice_2:
-
+                translateData();
                 break;
             case R.id.tv_choice_3:
 

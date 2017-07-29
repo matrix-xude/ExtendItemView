@@ -12,7 +12,7 @@ import java.util.List;
 public class ExtendData {
 
     // 当前数据的类型，用于表示应该展开哪个
-    private int type;
+    private String type;
     // 展开的类型名称
     private String typeName;
     //总共的层级数
@@ -68,11 +68,11 @@ public class ExtendData {
     }
 
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
