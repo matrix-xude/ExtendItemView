@@ -2,6 +2,7 @@ package com.xxd.extendpopmenu.entity;
 
 import com.xxd.extendpopmenu.utils.AssertUtil;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Created by xxd on 2017/7/28.
  */
 
-public class ExtendData {
+public class ExtendData implements Serializable{
 
     // 当前数据的类型，用于表示应该展开哪个
     private String type;
