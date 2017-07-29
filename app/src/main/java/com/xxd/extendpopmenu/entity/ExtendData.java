@@ -1,6 +1,6 @@
 package com.xxd.extendpopmenu.entity;
 
-import com.xxd.extendpopmenu.Utils.AssertUtil;
+import com.xxd.extendpopmenu.utils.AssertUtil;
 
 import java.util.ArrayList;
 import java.util.List;
