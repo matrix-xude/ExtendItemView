@@ -6,9 +6,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.xxd.extendpopmenu.entity.ExtendData;
+import com.xxd.extendpopmenu.entity.ExtendItem;
 import com.xxd.extendpopmenu.fragments.ExtendFragment;
 import com.xxd.extendpopmenu.listener.ExtendViewClickListener;
 import com.xxd.extendpopmenu.utils.AssertUtil;
+import com.xxd.extendpopmenu.utils.ExtendUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +40,7 @@ public class ExtendControl {
 
     /**
      * 展示某个类型的多级listView
+     *
      * @param type
      */
     public void showByType(String type) {
@@ -74,6 +77,7 @@ public class ExtendControl {
 
     /**
      * 获取所有的标签
+     *
      * @return
      */
     public List<ExtendData.Tag> getTags() {
@@ -82,7 +86,7 @@ public class ExtendControl {
             for (ExtendData data : mListData) {
                 List<ExtendData.Tag> tags = data.getTags();
                 if (!AssertUtil.isEmpty(tags)) {
-                    for (ExtendData.Tag  t: tags) {
+                    for (ExtendData.Tag t : tags) {
                         list.add(t);
                     }
                 }
@@ -92,16 +96,54 @@ public class ExtendControl {
     }
 
     /**
-     * 刷新当前正在展示的页面
+     * 删除一个选中的Tag，此方法可以刷新界面
+     *
+     * @param tag
      */
-    public void refreshView(){
-        if(currentFragment != null){
-            currentFragment.refreshView();
+    public void removeTag(ExtendData.Tag tag) {
+        removeTagNoRefresh(tag);
+        refreshView(currentFragment);
+    }
+
+    /**
+     * 删除一个集合的标签，此方法可以刷新界面
+     */
+    public void revomeTag(List<ExtendData.Tag> tagList) {
+        if (!AssertUtil.isEmpty(tagList)) {
+            for (ExtendData.Tag tag : tagList) {
+                removeTagNoRefresh(tag);
+            }
+            refreshView(currentFragment);
+        }
+    }
+
+    private void removeTagNoRefresh(ExtendData.Tag tag) {
+        List<ExtendItem> tagList = tag.getTagList();
+        for (int i = tagList.size() - 1; i >= 0; i--) {
+            ExtendItem item = tagList.get(i);
+            if (i == tagList.size() - 1) { // 最后一级，直接改为false
+                item.setChoice(false);
+            } else {
+                if (ExtendUtil.checkChildChoice(item)) { //上一级还有下一其他下一级
+                    break;
+                } else {
+                    item.setChoice(false);
+                }
+            }
+        }
+    }
+
+
+    // 刷新页面
+    private void refreshView(ExtendFragment fragment) {
+        if (fragment != null) {
+            fragment.refreshView();
         }
     }
 
     /**
      * 设置View任意级item被点击的监听
+     *
      * @param listener
      */
     public void setOnExtendViewClickListener(ExtendViewClickListener listener) {

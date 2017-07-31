@@ -118,21 +118,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        List<ExtendItem> tagList = tag.getTagList();
-                        for (int i = tagList.size() - 1; i >= 0; i--) {
-                            ExtendItem item = tagList.get(i);
-                            if (i == tagList.size() - 1) { // 最后一级，直接改为false
-                                item.setChoice(false);
-                            } else {
-                                if (ExtendUtil.checkChildChoice(item)) { //上一级还有下一其他下一级
-                                    break;
-                                } else {
-                                    item.setChoice(false);
-                                }
-                            }
-                        }
+                        control.removeTag(tag);
                         ll_home_tag.removeView(tv);
-                        control.refreshView();
                     }
                 });
                 ll_home_tag.addView(tv);

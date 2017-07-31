@@ -156,7 +156,7 @@ public class ExtendFragment extends Fragment {
                 ListView lv = (ListView) child;
                 ExtendAdapter adapter = (ExtendAdapter) lv.getAdapter();
                 List<ExtendItem> list = adapter.getList();
-                if (ExtendUtil.checkChildChoice(list) || i == 0) {  // 如有有被选中的，刷新界面
+                if (ExtendUtil.checkChildChoice(list) || i == 0) {  // 如有有被选中的，或者是第一级界面，刷新界面
                     adapter.notifyDataSetChanged();
                 } else {  // 没有被选中的条目
                     lv.setVisibility(View.GONE);
