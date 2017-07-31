@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#aa00ff00"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -56,12 +55,22 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_below="@+id/ll_home"
-        android:background="#55ffff00"
         android:id="@+id/fl_fragment_contain"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="300dp"
+        android:layout_below="@+id/ll_home"
+        android:background="#55ffff00"></FrameLayout>
 
-    </FrameLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fl_fragment_contain">
+
+        <LinearLayout
+            android:id="@+id/ll_home_tag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

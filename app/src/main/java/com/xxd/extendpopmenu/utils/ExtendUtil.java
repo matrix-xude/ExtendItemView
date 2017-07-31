@@ -28,5 +28,36 @@ public class ExtendUtil {
         }
     }
 
+    /**
+     * 检测一个item的子类是否有被选中的
+     *
+     * @return
+     */
+    public static boolean checkChildChoice(ExtendItem item) {
+        boolean flag = false;
+        if (item != null && !AssertUtil.isEmpty(item.getChild())) {
+            for(ExtendItem i: item.getChild()){
+                if (i.isChoice()){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
+    public static boolean checkChildChoice(List<ExtendItem> list) {
+        boolean flag = false;
+        if (!AssertUtil.isEmpty(list)) {
+            for(ExtendItem i: list){
+                if (i.isChoice()){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
 
 }

@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by xxd on 2017/7/28.
  */
 
-public class ExtendData implements Serializable{
+public class ExtendData implements Serializable {
 
     // 当前数据的类型，用于表示应该展开哪个
     private String type;
@@ -35,7 +35,7 @@ public class ExtendData implements Serializable{
     public List<Tag> getTags() {
 
         List<Tag> tagList = new ArrayList<>();
-        filterItem(list,null,tagList);
+        filterItem(list, null, tagList);
         return tagList;
     }
 
@@ -59,15 +59,15 @@ public class ExtendData implements Serializable{
             } else {
                 currentLevelTag = new Tag(lastTag);
             }
-            lastTag.addItem(item);
+            currentLevelTag.addItem(item);
 
             // 被选中的情况下 1：有子集合遍历子集合  2：没有子集合直接添加到子集合
             if (AssertUtil.isEmpty(item.getChild())) {
                 Tag tag = new Tag(currentLevelTag);
                 tagList.add(tag);
             } else {
-                boolean filterItem = filterItem(item.getChild(), lastTag, tagList);
-                if (!filterItem){  // 下一级没有被选中的条目，添加此条目到tagList
+                boolean filterFlag = filterItem(item.getChild(), currentLevelTag, tagList);
+                if (!filterFlag) {  // 下一级没有被选中的条目，添加此条目到tagList
                     Tag tag = new Tag(currentLevelTag);
                     tagList.add(tag);
                 }
@@ -120,7 +120,7 @@ public class ExtendData implements Serializable{
     /**
      * 标签数据
      */
-    class Tag {
+    public class Tag {
 
         // 用于存储tag数据,按层级顺序依次添加item
         private List<ExtendItem> tagList;
@@ -131,9 +131,8 @@ public class ExtendData implements Serializable{
 
         public Tag(Tag tag) {
             this.tagList = new ArrayList<>();
-            if (tag != null && !AssertUtil.isEmpty(tagList)) {
-                List<ExtendItem> lastTagList = tag.getTagList();
-                for (ExtendItem item : lastTagList) {
+            if (tag != null && !AssertUtil.isEmpty(tag.getTagList())) {
+                for (ExtendItem item : tag.getTagList()) {
                     addItem(item);
                 }
             }

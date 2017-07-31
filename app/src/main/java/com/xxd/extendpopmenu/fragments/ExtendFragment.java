@@ -8,16 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.xxd.extendpopmenu.adapter.ExtendAdapter;
 import com.xxd.extendpopmenu.entity.ExtendData;
 import com.xxd.extendpopmenu.entity.ExtendItem;
+import com.xxd.extendpopmenu.listener.ExtendViewClickListener;
 import com.xxd.extendpopmenu.utils.AssertUtil;
 import com.xxd.extendpopmenu.utils.ExtendUtil;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xxd on 2017/7/29.
@@ -30,6 +36,8 @@ public class ExtendFragment extends Fragment {
     private ExtendData extendData;
 
     private LinearLayout ll;
+    private Map<Integer, ExtendAdapter> adapterMap;
+    private ExtendViewClickListener listener;
 
 
     @Override
@@ -39,6 +47,7 @@ public class ExtendFragment extends Fragment {
         Bundle bundle = getArguments();
         extendData = (ExtendData) bundle.getSerializable("extendData");
         totalLevel = extendData.getTotalLevel();
+        adapterMap = new HashMap<>();
     }
 
     @Nullable
@@ -60,13 +69,17 @@ public class ExtendFragment extends Fragment {
         return ll;
     }
 
+    public void setOnExtendViewClickListener(ExtendViewClickListener listener) {
+        this.listener = listener;
+    }
+
     /**
      * 展示目标层级的listView
      *
      * @param targetLevel 目标的层级
      * @param itemList    目标层级的数据
      */
-    public void showListView(final int targetLevel, final List<ExtendItem> itemList) {
+    private void showListView(final int targetLevel, final List<ExtendItem> itemList) {
 
         // 检测出需要展开的listview
         final ListView lv;
@@ -83,6 +96,7 @@ public class ExtendFragment extends Fragment {
         // 无论是否存在，都要重新创建adpater
         final ExtendAdapter adapter = new ExtendAdapter(getActivity(), itemList);
         lv.setAdapter(adapter);
+        adapterMap.put(targetLevel + 1, adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,8 +138,31 @@ public class ExtendFragment extends Fragment {
                         showListView(currentLevel + 1, item.getChild());
 
                 }
+                // 点击监听
+                if (listener != null) {
+                    listener.onItemClick();
+                }
             }
         });
+    }
+
+    /**
+     * 刷新当前正在展示的页面
+     */
+    public void refreshView() {
+        for (int i = 0; i < totalLevel; i++) {
+            View child = ll.getChildAt(i);
+            if (child != null && child.getVisibility() == View.VISIBLE) {
+                ListView lv = (ListView) child;
+                ExtendAdapter adapter = (ExtendAdapter) lv.getAdapter();
+                List<ExtendItem> list = adapter.getList();
+                if (ExtendUtil.checkChildChoice(list) || i == 0) {  // 如有有被选中的，刷新界面
+                    adapter.notifyDataSetChanged();
+                } else {  // 没有被选中的条目
+                    lv.setVisibility(View.GONE);
+                }
+            }
+        }
     }
 
 }

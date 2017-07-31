@@ -27,6 +27,10 @@ public class ExtendAdapter extends BaseAdapter {
         this.list = list;
     }
 
+    public List<ExtendItem> getList() {
+        return list;
+    }
+
     @Override
     public int getCount() {
         return list.size();
