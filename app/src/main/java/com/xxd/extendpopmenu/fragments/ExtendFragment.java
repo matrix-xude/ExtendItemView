@@ -37,8 +37,6 @@ public class ExtendFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // 获取数据
         Bundle bundle = getArguments();
-        width = bundle.getInt("width");
-        height = bundle.getInt("height");
         extendData = (ExtendData) bundle.getSerializable("extendData");
         totalLevel = extendData.getTotalLevel();
     }
@@ -50,35 +48,17 @@ public class ExtendFragment extends Fragment {
         ll.setOrientation(LinearLayout.HORIZONTAL);
         ll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-
-//        ViewTreeObserver viewTreeObserver = ll.getViewTreeObserver();
-//        viewTreeObserver.addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
-//            @Override
-//            public void onDraw() {
-//                width = ll.getWidth();
-//                height = ll.getHeight();
-//            }
-//        });
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        TextView tv = new TextView(getActivity());
-//        tv.setWidth(500);
-//        tv.setHeight(100);
-//        tv.setText("测试再次"+extendData.getType());;
-//        TextView tv2 = new TextView(getActivity());
-//        tv2.setWidth(500);
-//        tv2.setHeight(100);
-//        tv2.setText("  接下来"+extendData.getType());
-//
-//        ll.addView(tv);
-//        ll.addView(tv2);
-        showListView(1,extendData.getList());
+        ll.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                width = ll.getMeasuredWidth();
+                height = ll.getMeasuredHeight();
+                showListView(1,extendData.getList());
+            }
+        });
         return ll;
     }
-
 
     /**
      * 展示目标层级的listView
@@ -95,8 +75,8 @@ public class ExtendFragment extends Fragment {
         View view = ll.getChildAt(targetLevel - 1);
         if (view == null) {  // 如果目标层级的listview没有创建
             lv = new ListView(getActivity());
-            width = 1200;
-            height = 1200;
+//            width = 1200;
+//            height = 1200;
             lv.setLayoutParams(new ViewGroup.LayoutParams(width / totalLevel, height));
             ll.addView(lv);
         } else {  // 如果目标层级的listview已经存在

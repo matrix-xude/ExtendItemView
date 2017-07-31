@@ -64,23 +64,21 @@ public class ExtendControl {
                 if (type.equals(data.getType())) {
                     fragment = new ExtendFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putInt("width", mWidth);
-                    bundle.putInt("height", mHeight);
                     bundle.putSerializable("extendData", data);
                     fragment.setArguments(bundle);
                     fragmentMap.put(type, fragment);
-//                    ft.add(mLayoutId,fragment);
+                    ft.add(mLayoutId, fragment);
+                    break;
                 }
             }
         }
-//        else{ // 已经被初始化过了
-//            if(currentFragment != null){ // 隐藏上一个fragment
-//                ft.hide(currentFragment);
-//            }
-//        }
-//        currentFragment = fragment;
-//        ft.show(currentFragment);
-        ft.replace(mLayoutId, fragment);
+
+        if (currentFragment != null) { // 隐藏上一个fragment
+            ft.hide(currentFragment);
+        }
+
+        currentFragment = fragment;
+        ft.show(currentFragment);
         ft.commit();
     }
 

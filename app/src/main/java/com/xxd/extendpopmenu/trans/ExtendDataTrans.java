@@ -18,7 +18,34 @@ import java.util.List;
 
 public class ExtendDataTrans {
 
+    /**
+     * 转换无穷数级的格式（数组模式）
+     *
+     * @param back
+     * @return
+     */
     public static List<ExtendData> parse(List<BackExtendHeader> back) {
+        List<ExtendData> list = new ArrayList<>();
+        if (!AssertUtil.isEmpty(back)) {
+            for (int i = 0; i < back.size(); i++) {
+                BackExtendHeader header = back.get(i);
+                ExtendData data = new ExtendData();
+                list.add(data);
+                data.setType(header.getType());
+                addTitle(data, header.getList());
+
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 转换服务器返回的每个数组只有1个子项的数据，但是有很多重复数组的格式。。。（什么乱七八糟的格式。。。）
+     *
+     * @param back
+     * @return
+     */
+    public static List<ExtendData> parseSingle(List<BackExtendHeader> back) {
         List<ExtendData> list = new ArrayList<>();
         if (!AssertUtil.isEmpty(back)) {
             for (int i = 0; i < back.size(); i++) {
@@ -79,5 +106,15 @@ public class ExtendDataTrans {
             }
         }
     }
+
+    private static void addContentSingle(ExtendData data, List<ExtendItem> itemList, List<BackExtendLevel2> levelList2, int lastLevel) {
+        if (AssertUtil.isEmpty(levelList2))
+            return;
+        // 总层级+1
+        if (data.getTotalLevel() < lastLevel + 1)
+            data.setTotalLevel(lastLevel + 1);
+
+    }
+
 
 }
