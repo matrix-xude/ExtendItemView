@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.xxd.extendpopmenu.HomeActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
-
+        android:id="@+id/ll_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -57,4 +54,13 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:layout_below="@+id/ll_home"
+        android:background="#55ffff00"
+        android:id="@+id/fl_fragment_contain"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+    </FrameLayout>
+
+</RelativeLayout>

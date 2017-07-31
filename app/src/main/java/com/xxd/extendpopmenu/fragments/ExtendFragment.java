@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.xxd.extendpopmenu.adapter.ExtendAdapter;
 import com.xxd.extendpopmenu.entity.ExtendData;
@@ -46,9 +48,37 @@ public class ExtendFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.HORIZONTAL);
-        ll.setLayoutParams(new ViewGroup.LayoutParams(width, height));
+        ll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+
+//        ViewTreeObserver viewTreeObserver = ll.getViewTreeObserver();
+//        viewTreeObserver.addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
+//            @Override
+//            public void onDraw() {
+//                width = ll.getWidth();
+//                height = ll.getHeight();
+//            }
+//        });
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        TextView tv = new TextView(getActivity());
+//        tv.setWidth(500);
+//        tv.setHeight(100);
+//        tv.setText("测试再次"+extendData.getType());;
+//        TextView tv2 = new TextView(getActivity());
+//        tv2.setWidth(500);
+//        tv2.setHeight(100);
+//        tv2.setText("  接下来"+extendData.getType());
+//
+//        ll.addView(tv);
+//        ll.addView(tv2);
+        showListView(1,extendData.getList());
         return ll;
     }
+
 
     /**
      * 展示目标层级的listView
@@ -56,7 +86,7 @@ public class ExtendFragment extends Fragment {
      * @param targetLevel 目标的层级
      * @param itemList    目标层级的数据
      */
-    private void showListView(final int targetLevel, final List<ExtendItem> itemList) {
+    public void showListView(final int targetLevel, final List<ExtendItem> itemList) {
 
         // 目标的listview是否已经init过
         boolean initListFlag = false;
@@ -65,7 +95,10 @@ public class ExtendFragment extends Fragment {
         View view = ll.getChildAt(targetLevel - 1);
         if (view == null) {  // 如果目标层级的listview没有创建
             lv = new ListView(getActivity());
+            width = 1200;
+            height = 1200;
             lv.setLayoutParams(new ViewGroup.LayoutParams(width / totalLevel, height));
+            ll.addView(lv);
         } else {  // 如果目标层级的listview已经存在
             lv = (ListView) view;
             initListFlag = true;
@@ -93,7 +126,7 @@ public class ExtendFragment extends Fragment {
                         // 收起所有子listview
                         for (int i = currentLevel; currentLevel < totalLevel; i++) {
                             View child = ll.getChildAt(i);
-                            if (child !=null && child.getVisibility() == View.VISIBLE) {
+                            if (child != null && child.getVisibility() == View.VISIBLE) {
                                 child.setVisibility(View.GONE);
                             }
                         }
@@ -108,13 +141,13 @@ public class ExtendFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                         // 收起所有二级之后的子listview
                         for (int i = currentLevel; currentLevel < totalLevel; i++) {
-                            View child = ll.getChildAt(i+1);
-                            if (child !=null && child.getVisibility() == View.VISIBLE) {
+                            View child = ll.getChildAt(i + 1);
+                            if (child != null && child.getVisibility() == View.VISIBLE) {
                                 child.setVisibility(View.GONE);
                             }
                         }
                         // 展示下级listview
-                        showListView(currentLevel+1,item.getChild());
+                        showListView(currentLevel + 1, item.getChild());
 
                     }
                 }

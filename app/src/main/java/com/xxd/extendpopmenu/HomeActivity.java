@@ -3,7 +3,9 @@ package com.xxd.extendpopmenu;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.xxd.extendpopmenu.entity.BackExtendHeader;
 import com.xxd.extendpopmenu.entity.ExtendData;
 import com.xxd.extendpopmenu.trans.ExtendDataTrans;
+import com.xxd.extendpopmenu.view.ExtendControl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +29,9 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv1, tv2, tv3, tv4;
+    private FrameLayout fl_fragment_contain;
     private List<BackExtendHeader> data;
+    private ExtendControl control;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +39,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
         initView();
-
+        initData();
     }
 
     private void initData() {
@@ -49,12 +54,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         String type = header1.getType();
         Log.e("xxd", "当前类型：" + type);
 
+        translateData();
     }
 
     private void translateData() {
         List<ExtendData> parse = ExtendDataTrans.parse(data);
         ExtendData data = parse.get(1);
         Log.e("xxd", "总层级数：" + data.getTotalLevel());
+        control = new ExtendControl(this, R.id.fl_fragment_contain, parse);
     }
 
     private void initView() {
@@ -62,6 +69,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tv2 = (TextView) findViewById(R.id.tv_choice_2);
         tv3 = (TextView) findViewById(R.id.tv_choice_3);
         tv4 = (TextView) findViewById(R.id.tv_choice_4);
+        fl_fragment_contain = (FrameLayout) findViewById(R.id.fl_fragment_contain);
 
         tv1.setOnClickListener(this);
         tv2.setOnClickListener(this);
@@ -73,16 +81,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_choice_1:
-                initData();
+                control.showByType("1");
                 break;
             case R.id.tv_choice_2:
-                translateData();
+                control.showByType("2");
                 break;
             case R.id.tv_choice_3:
-
+                control.showByType("3");
                 break;
             case R.id.tv_choice_4:
-
+                control.showByType("4");
                 break;
         }
     }

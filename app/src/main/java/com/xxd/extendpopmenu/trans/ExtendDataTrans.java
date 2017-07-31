@@ -63,7 +63,8 @@ public class ExtendDataTrans {
         if (AssertUtil.isEmpty(levelList2))
             return;
         // 总层级+1
-        data.setTotalLevel(lastLevel + 1);
+        if (data.getTotalLevel() < lastLevel + 1)
+            data.setTotalLevel(lastLevel + 1);
         // 遍历level2集合赋值到新的集合中
         for (BackExtendLevel2 level2 : levelList2) {
             ExtendItem item = new ExtendItem();
