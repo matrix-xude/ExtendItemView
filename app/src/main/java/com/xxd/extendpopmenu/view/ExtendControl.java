@@ -1,7 +1,6 @@
 package com.xxd.extendpopmenu.view;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
@@ -71,6 +70,7 @@ public class ExtendControl {
         }
 
         currentFragment = fragment;
+        refreshView(currentFragment);
         ft.show(currentFragment);
         ft.commit();
     }

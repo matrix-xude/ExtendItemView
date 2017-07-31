@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.xxd.extendpopmenu.adapter.ExtendAdapter;
@@ -20,7 +18,6 @@ import com.xxd.extendpopmenu.listener.ExtendViewClickListener;
 import com.xxd.extendpopmenu.utils.AssertUtil;
 import com.xxd.extendpopmenu.utils.ExtendUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
