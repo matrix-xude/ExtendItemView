@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void translateData() {
-        List<ExtendData> parse = ExtendDataTrans.parse(data);
+        List<ExtendData> parse = ExtendDataTrans.parseSingle(data);
         ExtendData data = parse.get(1);
         Log.e("xxd", "总层级数：" + data.getTotalLevel());
         control = new ExtendControl(this, R.id.fl_fragment_contain, parse);

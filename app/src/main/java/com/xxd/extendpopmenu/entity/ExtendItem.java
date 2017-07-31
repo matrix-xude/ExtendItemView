@@ -1,16 +1,16 @@
 package com.xxd.extendpopmenu.entity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 河图 on 2017/7/28.
- *
+ * <p>
  * 此是对原始接口数据的重新封装，使得数据能匹配多层级、可展开、可复选的View
- *
+ * <p>
  * 备注：当有标题的接口数据会被封装成这里的一个层级，所以添加了一个标识符 isTitle，
  * 这是为了标识当前层级是标题转换过来的，还是content里面的内容转换的层级，title转换
  * 过来的此类没有code
- *
  */
 
 public class ExtendItem {
@@ -27,8 +27,8 @@ public class ExtendItem {
 
     // 当前条目是否被选中，多选判断
     private boolean isChoice;
-    // 是否展开当前条目的下一级，同一level最多只能有一个展开的条目
-    private boolean childShow;
+    // 缓存下一级对应的 code:object,只在解析的时候用到
+    private Map<String, ExtendItem> cacheMap;
 
     public int getCurrentLevel() {
         return currentLevel;
@@ -78,11 +78,11 @@ public class ExtendItem {
         isChoice = choice;
     }
 
-    public boolean isChildShow() {
-        return childShow;
+    public Map<String, ExtendItem> getCacheMap() {
+        return cacheMap;
     }
 
-    public void setChildShow(boolean childShow) {
-        this.childShow = childShow;
+    public void setCacheMap(Map<String, ExtendItem> cacheMap) {
+        this.cacheMap = cacheMap;
     }
 }

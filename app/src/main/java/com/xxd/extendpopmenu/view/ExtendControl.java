@@ -2,14 +2,9 @@ package com.xxd.extendpopmenu.view;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewTreeObserver;
 
-import com.xxd.extendpopmenu.R;
 import com.xxd.extendpopmenu.entity.ExtendData;
 import com.xxd.extendpopmenu.fragments.ExtendFragment;
 
@@ -25,30 +20,14 @@ public class ExtendControl {
 
     private Activity mActivity;
     private List<ExtendData> mListData;
-    private int mWidth, mHeight;
     private int mLayoutId;
     private Map<String, ExtendFragment> fragmentMap;
     private Fragment currentFragment;
 
     public ExtendControl(Activity activity, int layoutId, List<ExtendData> list) {
-
-        final View view = activity.findViewById(layoutId);
-        ViewTreeObserver viewTreeObserver = view.getViewTreeObserver();
-        viewTreeObserver.addOnDrawListener(new ViewTreeObserver.OnDrawListener() {
-            @Override
-            public void onDraw() {
-                mWidth = view.getWidth();
-                mHeight = view.getHeight();
-            }
-        });
-
         mLayoutId = layoutId;
         mActivity = activity;
         mListData = list;
-        initData(list);
-    }
-
-    private void initData(List<ExtendData> list) {
         fragmentMap = new HashMap();
     }
 

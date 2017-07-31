@@ -4,7 +4,9 @@ import com.xxd.extendpopmenu.utils.AssertUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xxd on 2017/7/28.
@@ -20,6 +22,12 @@ public class ExtendData implements Serializable{
     private int totalLevel;
     // 数据
     private List<ExtendItem> list;
+    // 缓存下一级对应的 code:object,只在解析的时候用到
+    private Map<String, ExtendItem> cacheMap;
+
+    public ExtendData() {
+        cacheMap = new HashMap<>();
+    }
 
     /**
      * 获取标签数据
@@ -99,6 +107,14 @@ public class ExtendData implements Serializable{
 
     public void setList(List<ExtendItem> list) {
         this.list = list;
+    }
+
+    public Map<String, ExtendItem> getCacheMap() {
+        return cacheMap;
+    }
+
+    public void setCacheMap(Map<String, ExtendItem> cacheMap) {
+        this.cacheMap = cacheMap;
     }
 
     /**
