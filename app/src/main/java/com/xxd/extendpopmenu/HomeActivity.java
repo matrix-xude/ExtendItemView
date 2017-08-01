@@ -10,13 +10,17 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xxd.extendpopmenu.entity.BackExtendHeader;
+import com.xxd.extendpopmenu.entity.BackHotal;
+import com.xxd.extendpopmenu.entity.BackHotalBase;
 import com.xxd.extendpopmenu.entity.ExtendData;
 import com.xxd.extendpopmenu.entity.ExtendItem;
 import com.xxd.extendpopmenu.listener.ExtendViewClickListener;
+import com.xxd.extendpopmenu.net.RetrofitAssistant;
 import com.xxd.extendpopmenu.trans.ExtendDataTrans;
 import com.xxd.extendpopmenu.utils.AssertUtil;
 import com.xxd.extendpopmenu.utils.ExtendUtil;
@@ -26,6 +30,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -99,7 +107,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 control.showByType("3");
                 break;
             case R.id.tv_choice_4:
-                control.showByType("4");
+//                control.showByType("4");
+                Call<BackHotalBase> call = RetrofitAssistant.getGsonService().hotalClassifySearch(8 + "", "亲子", 0 + "", 10 + "");
+                call.enqueue(new Callback<BackHotalBase>() {
+                    @Override
+                    public void onResponse(Call<BackHotalBase> call, Response<BackHotalBase> response) {
+                        Toast.makeText(getApplicationContext(),"请求成功！",Toast.LENGTH_SHORT).show();
+                        BackHotalBase body = response.body();
+                        String s = body.toString();
+                    }
+
+                    @Override
+                    public void onFailure(Call<BackHotalBase> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),"失败！"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
     }

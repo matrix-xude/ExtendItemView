@@ -26,6 +26,17 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    // 添加对retrofit的支持，底层是okhttp
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okio:okio:1.13.0'
+    // 添加对Rxjava的支持
+    compile 'io.reactivex.rxjava2:rxjava:x.y.z'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    // retrofit对于gson和rxjava的支持
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    // Gson支持
     compile 'com.google.code.gson:gson:2.8.1'
     testCompile 'junit:junit:4.12'
 }
