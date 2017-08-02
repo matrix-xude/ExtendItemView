@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void translateData() {
-        List<ExtendData> parse = ExtendDataTrans.parseSingle(data);
+        List<ExtendData> parse = ExtendDataTrans.parse(data);
         ExtendData data = parse.get(1);
         Log.e("xxd", "总层级数：" + data.getTotalLevel());
         control = new ExtendControl(this, R.id.fl_fragment_contain, parse);
@@ -107,22 +107,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 control.showByType("3");
                 break;
             case R.id.tv_choice_4:
-//                control.showByType("4");
-                Call<BackHotalBase> call = RetrofitAssistant.getGsonService().hotalClassifySearch(8 + "", "亲子", 0 + "", 10 + "");
-                call.enqueue(new Callback<BackHotalBase>() {
-                    @Override
-                    public void onResponse(Call<BackHotalBase> call, Response<BackHotalBase> response) {
-                        Toast.makeText(getApplicationContext(),"请求成功！",Toast.LENGTH_SHORT).show();
-                        BackHotalBase body = response.body();
-                        String s = body.toString();
-                    }
-
-                    @Override
-                    public void onFailure(Call<BackHotalBase> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),"失败！"+t.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-                break;
+                control.showByType("4");
+//                Call<BackHotalBase> call = RetrofitAssistant.getGsonService().hotalClassifySearch(8 + "", "亲子", 0 + "", 10 + "");
+//                call.enqueue(new Callback<BackHotalBase>() {
+//                    @Override
+//                    public void onResponse(Call<BackHotalBase> call, Response<BackHotalBase> response) {
+//                        Toast.makeText(getApplicationContext(),"请求成功！",Toast.LENGTH_SHORT).show();
+//                        BackHotalBase body = response.body();
+//                        String s = body.toString();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<BackHotalBase> call, Throwable t) {
+//                        Toast.makeText(getApplicationContext(),"失败！"+t.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                break;
         }
     }
 

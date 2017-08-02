@@ -131,8 +131,14 @@ public class ExtendFragment extends Fragment {
                         }
                     }
                     // 有下级，则展示下级listview
-                    if (!AssertUtil.isEmpty(item.getChild()))
+                    if (!AssertUtil.isEmpty(item.getChild())){
                         showListView(currentLevel + 1, item.getChild());
+                    }else {  // 没有下级，则收起下级
+                        View child = ll.getChildAt(currentLevel);
+                        if (child != null && child.getVisibility() == View.VISIBLE) {
+                            child.setVisibility(View.GONE);
+                        }
+                    }
 
                 }
                 // 点击监听
