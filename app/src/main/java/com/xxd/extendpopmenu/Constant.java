@@ -15,6 +15,6 @@ public class Constant {
         return 2;
     }
 
-
+    public static final String AAA = "http://192.168.10.56:8080/";
 
 }

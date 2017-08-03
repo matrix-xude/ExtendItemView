@@ -15,4 +15,6 @@ public class AssertUtil {
     public static boolean isEmpty( String str) {
         return str == null || "".equals(str);
     }
+
+    public static void dodo(){}
 }
