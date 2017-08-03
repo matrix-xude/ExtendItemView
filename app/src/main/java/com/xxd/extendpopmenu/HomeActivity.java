@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
         initData();
+        String s = "11";
     }
 
     private void initData() {
