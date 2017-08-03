@@ -11,6 +11,10 @@ public class Constant {
 //        public static final String BASE = "http://192.168.10.56:8080/";
 //        public static final String BASE = "http://rc-ws.mymhotel.com/";
 
+    public static int add(){
+        return 2;
+    }
+
 
 
 }
